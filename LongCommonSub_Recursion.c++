@@ -1,35 +1,47 @@
-#include<iostream>
-#include<cstring>
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 
-int max(int a,int b)
+int max(int a, int b);
+
+int LCS(char *A, char *B, int x, int y)
 {
-    return (a>b)?a:b;
+    int L[x + 1][y + 1];
+    int i, j;
+    for (i = 0; i <= x; i++)
+    {
+        for (j = 0; j <= y; j++)
+        {
+            if (i==0 || j==0)
+            {
+                L[i][j]=0;
+            }
+            
+            else if(A[i - 1] == B[j - 1])
+            {
+                L[i][j] = 1 + L[i - 1][j - 1];
+            }
+            else
+            {
+                L[i][j] = max(L[i - 1][j], L[i][j - 1]);
+            }
+        }
+    }
+    return L[x][y];
 }
 
-int LCS(char* A,char* B,int i,int j)
+int max(int a, int b)
 {
-    if(A[i]=='\0'|| B[j]=='\0');
-    {
+    return (a > b) ? a : b;
+}
+
+int main()
+{
+    char A[] = "AGGTAB";
+    char B[] = "GXTXAYB";
+    int m = strlen(A);
+    int n = strlen(B);
+    cout << LCS(A, B, m, n);
     return 0;
-    }
-    if(A[i]==B[j])
-    {
-        return 1+LCS(A,B,i+1,j+1);
-    }
-    else{
-        return max(LCS(A,B,i+1,j),LCS(A,B,i,j+1));
-    }
-}
-
-
-
-int main(){
-  char A[]="AGGTAB";
-  char B[]="GXTXAYB";
-  int m=strlen(A);
-  int n=strlen(B);
-  cout<<LCS(A,B,m,n);
-  return 0;
 }
