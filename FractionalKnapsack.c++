@@ -44,7 +44,13 @@ class ProfitEarned
 int main()
 {
     int n=3, W = 50;
-    Item arr[n] = {{100,20},{60,10},{120,30}};
+    Item arr[n] ;//= {{100,20},{60,10},{120,30}};
+    for(int i =0;i<n;i++)
+    {
+        cout<<"Enter Weight and Profit: "<<endl;
+        cin>>arr[i].value>>arr[i].weight;
+        cout<<endl;
+    }
     ProfitEarned obj;
     double ans = obj.FracKnapsack(W,arr,n);
     cout<<" Max Profit Earned: "<<ans<<endl;
