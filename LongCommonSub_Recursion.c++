@@ -4,6 +4,9 @@
 using namespace std;
 
 int max(int a, int b);
+{
+    return (a > b) ? a : b;
+}
 
 int LCS(char *A, char *B, int x, int y)
 {
@@ -31,10 +34,6 @@ int LCS(char *A, char *B, int x, int y)
     return L[x][y];
 }
 
-int max(int a, int b)
-{
-    return (a > b) ? a : b;
-}
 
 int main()
 {
