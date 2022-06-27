@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define V 6		//No of vertices
+#define V 6
 
 int selectMinVertex(vector<int>& value,vector<bool>& setMST)
 {
@@ -20,29 +20,17 @@ int selectMinVertex(vector<int>& value,vector<bool>& setMST)
 
 void findMST(int graph[V][V])
 {
-	int parent[V];		//Stores MST
-	vector<int> value(V,INT_MAX);	//Used for edge relaxation
-	vector<bool> setMST(V,false);	//TRUE->Vertex is included in MST
-
-	//Assuming start point as Node-0
-	parent[0] = -1;	//Start node has no parent
-	value[0] = 0;	//start node has value=0 to get picked 1st
-
-	//Form MST with (V-1) edges
+	int parent[V];		
+	vector<int> value(V,INT_MAX);	
+	vector<bool> setMST(V,false);	
+	parent[0] = -1;	
+	value[0] = 0;	
 	for(int i=0;i<V-1;++i)
 	{
-		//Select best Vertex by applying greedy method
 		int U = selectMinVertex(value,setMST);
-		setMST[U] = true;	//Include new Vertex in MST
-
-		//Relax adjacent vertices (not yet included in MST)
+		setMST[U] = true;
 		for(int j=0;j<V;++j)
 		{
-			/* 3 constraints to relax:-
-			      1.Edge is present from U to j.
-			      2.Vertex j is not included in MST
-			      3.Edge weight is smaller than current edge weight
-			*/
 			if(graph[U][j]!=0 && setMST[j]==false && graph[U][j]<value[j])
 			{
 				value[j] = graph[U][j];
@@ -50,7 +38,6 @@ void findMST(int graph[V][V])
 			}
 		}
 	}
-	//Print MST
 	for(int i=1;i<V;++i)
 		cout<<"U->V: "<<parent[i]<<"->"<<i<<"  wt = "<<graph[parent[i]][i]<<"\n";
 }
